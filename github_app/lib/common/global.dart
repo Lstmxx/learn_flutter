@@ -1,10 +1,13 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:github_app/common/net_cache.dart';
 import 'package:github_app/log/log_helper.dart';
 import 'package:github_app/models/cache_config.dart';
 import 'package:github_app/models/profile.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import 'git_api.dart';
 
 const _themes = <MaterialColor>[
   Colors.blue,
