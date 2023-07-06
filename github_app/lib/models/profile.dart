@@ -4,32 +4,35 @@
 
 import 'dart:convert';
 
+import 'package:github_app/models/cache_config.dart';
+import 'package:github_app/models/user.dart';
+
 Profile profileFromJson(String str) => Profile.fromJson(json.decode(str));
 
 String profileToJson(Profile data) => json.encode(data.toJson());
 
 class Profile {
-  String user;
-  String token;
-  int theme;
-  String cache;
-  String lastLogin;
-  String locale;
+  User? user;
+  String? token;
+  int? theme;
+  CacheConfig? cache;
+  String? lastLogin;
+  String? locale;
 
   Profile({
-    required this.user,
-    required this.token,
-    required this.theme,
-    required this.cache,
-    required this.lastLogin,
-    required this.locale,
+    this.user,
+    this.token,
+    this.theme,
+    this.cache,
+    this.lastLogin,
+    this.locale,
   });
 
   Profile copyWith({
-    String? user,
+    User? user,
     String? token,
     int? theme,
-    String? cache,
+    CacheConfig? cache,
     String? lastLogin,
     String? locale,
   }) =>

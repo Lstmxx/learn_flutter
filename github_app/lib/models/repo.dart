@@ -4,6 +4,8 @@
 
 import 'dart:convert';
 
+import 'package:github_app/models/user.dart';
+
 Repo repoFromJson(String str) => Repo.fromJson(json.decode(str));
 
 String repoToJson(Repo data) => json.encode(data.toJson());
@@ -12,8 +14,8 @@ class Repo {
   int id;
   String name;
   String fullName;
-  String owner;
-  String parent;
+  User owner;
+  Repo parent;
   bool private;
   String description;
   bool fork;
@@ -55,8 +57,8 @@ class Repo {
     int? id,
     String? name,
     String? fullName,
-    String? owner,
-    String? parent,
+    User? owner,
+    Repo? parent,
     bool? private,
     String? description,
     bool? fork,
