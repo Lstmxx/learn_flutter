@@ -4,47 +4,51 @@
 
 import 'dart:convert';
 
+Repo repoFromJson(String str) => Repo.fromJson(json.decode(str));
+
+String repoToJson(Repo data) => json.encode(data.toJson());
+
 class Repo {
-  int? id;
-  String? name;
-  String? fullName;
-  String? owner;
-  String? parent;
-  bool? private;
-  String? description;
-  bool? fork;
-  String? language;
-  int? forksCount;
-  int? stargazersCount;
-  int? size;
-  String? defaultBranch;
-  int? openIssuesCount;
-  DateTime? pushedAt;
-  DateTime? createdAt;
-  DateTime? updatedAt;
-  int? subscribersCount;
-  License? license;
+  int id;
+  String name;
+  String fullName;
+  String owner;
+  String parent;
+  bool private;
+  String description;
+  bool fork;
+  String language;
+  int forksCount;
+  int stargazersCount;
+  int size;
+  String defaultBranch;
+  int openIssuesCount;
+  DateTime pushedAt;
+  DateTime createdAt;
+  DateTime updatedAt;
+  int subscribersCount;
+  License license;
 
   Repo({
-    this.id,
-    this.name,
-    this.fullName,
-    this.owner,
-    this.parent,
-    this.private,
-    this.description,
-    this.fork,
-    this.language,
-    this.forksCount,
-    this.stargazersCount,
-    this.size,
-    this.defaultBranch,
-    this.openIssuesCount,
-    this.pushedAt,
-    this.createdAt,
-    this.updatedAt,
-    this.subscribersCount,
-    this.license,
+    required this.id,
+    required this.name,
+    required this.fullName,
+    required this.owner,
+    required this.parent,
+    required this.private,
+    required this.description,
+    required this.fork,
+    required this.language,
+    required this.forksCount,
+    required this.stargazersCount,
+    required this.size,
+    required this.defaultBranch,
+    required this.openIssuesCount,
+    required this.pushedAt,
+    required this.createdAt,
+    required this.updatedAt,
+    required this.subscribersCount,
+    required this.license,
   });
 
   Repo copyWith({
@@ -90,38 +94,26 @@ class Repo {
         license: license ?? this.license,
       );
 
-  factory Repo.fromRawJson(String str) => Repo.fromJson(json.decode(str));
-
-  String toRawJson() => json.encode(toJson());
-
   factory Repo.fromJson(Map<String, dynamic> json) => Repo(
         id: json["id"],
         name: json["name"],
         fullName: json["full_name"],
         owner: json["owner"],
-        parent: json["parent?"],
+        parent: json["parent"],
         private: json["private"],
         description: json["description"],
         fork: json["fork"],
-        language: json["language?"],
+        language: json["language"],
         forksCount: json["forks_count"],
         stargazersCount: json["stargazers_count"],
         size: json["size"],
         defaultBranch: json["default_branch"],
         openIssuesCount: json["open_issues_count"],
-        pushedAt: json["pushed_at"] == null
-            ? null
-            : DateTime.parse(json["pushed_at"]),
-        createdAt: json["created_at"] == null
-            ? null
-            : DateTime.parse(json["created_at"]),
-        updatedAt: json["updated_at"] == null
-            ? null
-            : DateTime.parse(json["updated_at"]),
-        subscribersCount: json["subscribers_count?"],
-        license: json["license?"] == null
-            ? null
-            : License.fromJson(json["license?"]),
+        pushedAt: DateTime.parse(json["pushed_at"]),
+        createdAt: DateTime.parse(json["created_at"]),
+        updatedAt: DateTime.parse(json["updated_at"]),
+        subscribersCount: json["subscribers_count"],
+        license: License.fromJson(json["license"]),
       );
 
   Map<String, dynamic> toJson() => {
@@ -129,37 +121,37 @@ class Repo {
         "name": name,
         "full_name": fullName,
         "owner": owner,
-        "parent?": parent,
+        "parent": parent,
         "private": private,
         "description": description,
         "fork": fork,
-        "language?": language,
+        "language": language,
         "forks_count": forksCount,
         "stargazers_count": stargazersCount,
         "size": size,
         "default_branch": defaultBranch,
         "open_issues_count": openIssuesCount,
-        "pushed_at": pushedAt?.toIso8601String(),
-        "created_at": createdAt?.toIso8601String(),
-        "updated_at": updatedAt?.toIso8601String(),
-        "subscribers_count?": subscribersCount,
-        "license?": license?.toJson(),
+        "pushed_at": pushedAt.toIso8601String(),
+        "created_at": createdAt.toIso8601String(),
+        "updated_at": updatedAt.toIso8601String(),
+        "subscribers_count": subscribersCount,
+        "license": license.toJson(),
       };
 }
 
 class License {
-  String? key;
-  String? name;
-  String? spdxId;
-  String? url;
-  String? nodeId;
+  String key;
+  String name;
+  String spdxId;
+  String url;
+  String nodeId;
 
   License({
-    this.key,
-    this.name,
-    this.spdxId,
-    this.url,
-    this.nodeId,
+    required this.key,
+    required this.name,
+    required this.spdxId,
+    required this.url,
+    required this.nodeId,
   });
 
   License copyWith({
@@ -176,10 +168,6 @@ class License {
         url: url ?? this.url,
         nodeId: nodeId ?? this.nodeId,
       );
-
-  factory License.fromRawJson(String str) => License.fromJson(json.decode(str));
-
-  String toRawJson() => json.encode(toJson());
 
   factory License.fromJson(Map<String, dynamic> json) => License(
         key: json["key"],

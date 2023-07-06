@@ -1,8 +1,8 @@
 {
-  "user?":"$user", 
-  "token?":"", 
+  "user":"$user", 
+  "token":"", 
   "theme":0,  
-  "cache?":"$cacheConfig", 
-  "lastLogin?":"", 
-  "locale?":"" 
+  "cache":"$cacheConfig", 
+  "lastLogin":"", 
+  "locale":"" 
 }
