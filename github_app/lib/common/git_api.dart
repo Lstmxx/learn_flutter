@@ -5,6 +5,7 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:flutter/widgets.dart';
+import 'package:github_app/models/repo.dart';
 import 'package:github_app/models/user.dart';
 
 import 'global.dart';
@@ -59,5 +60,22 @@ class Git {
     Global.netCache.cache.clear();
     Global.profile.token = basic;
     return User.fromJson(r.data);
+  }
+
+  //获取用户项目列表
+  Future<List<Repo>> getRepos({
+    Map<String, dynamic>? queryParameters, //query参数，用于接收分页信息
+    refresh = false,
+  }) async {
+    if (refresh) {
+      // 列表下拉刷新，需要删除缓存（拦截器中会读取这些信息）
+      _options.extra!.addAll({"refresh": true, "list": true});
+    }
+    var r = await dio.get<List>(
+      "user/repos",
+      queryParameters: queryParameters,
+      options: _options,
+    );
+    return r.data!.map((e) => Repo.fromJson(e)).toList();
   }
 }
