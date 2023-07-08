@@ -10,10 +10,16 @@ class WelcomePage extends StatelessWidget {
       body: Column(
         children: [
           Expanded(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 50),
-              child: Image.asset(
-                'assets/images/cat.jpg',
+            child: Align(
+              alignment: Alignment.bottomCenter,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 50,
+                  vertical: 20,
+                ),
+                child: Image.asset(
+                  'assets/images/cat.jpg',
+                ),
               ),
             ),
           ),
@@ -103,7 +109,10 @@ class WelcomePage extends StatelessWidget {
                           SizedBox(
                             width: 10,
                           ),
-                          Text('English'),
+                          Text(
+                            'English',
+                            style: TextStyle(color: Color(0xFF00A884)),
+                          ),
                           SizedBox(
                             width: 10,
                           ),
