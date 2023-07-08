@@ -60,15 +60,60 @@ class WelcomePage extends StatelessWidget {
                     ),
                   ),
                 ),
-                ElevatedButton(
-                  onPressed: () {},
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color(0xFF00A884),
-                    foregroundColor: const Color(0XFF111B21),
-                    splashFactory: NoSplash.splashFactory,
+                SizedBox(
+                  height: 42,
+                  width: MediaQuery.of(context).size.width - 100,
+                  child: ElevatedButton(
+                    onPressed: () {},
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: const Color(0xFF00A884),
+                      foregroundColor: const Color(0XFF111B21),
+                      splashFactory: NoSplash.splashFactory,
+                      elevation: 0,
+                      shadowColor: Colors.transparent,
+                    ),
+                    child: const Text(
+                      'AGREE AND CONTINUE',
+                    ),
                   ),
-                  child: const Text(
-                    'AGREE AND CONTINUE',
+                ),
+                const SizedBox(
+                  height: 50,
+                ),
+                Material(
+                  color: const Color(0xFF182229),
+                  borderRadius: BorderRadius.circular(20),
+                  child: InkWell(
+                    onTap: () {},
+                    borderRadius: BorderRadius.circular(20),
+                    splashFactory: NoSplash.splashFactory,
+                    highlightColor: const Color(0xff09141a),
+                    child: const Padding(
+                      padding: EdgeInsets.symmetric(
+                        horizontal: 16,
+                        vertical: 8,
+                      ),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Icon(
+                            Icons.language,
+                            color: Color(0xFF00A884),
+                          ),
+                          SizedBox(
+                            width: 10,
+                          ),
+                          Text('English'),
+                          SizedBox(
+                            width: 10,
+                          ),
+                          Icon(
+                            Icons.keyboard_arrow_down,
+                            color: Color(0xFF00A884),
+                          )
+                        ],
+                      ),
+                    ),
                   ),
                 ),
               ],
