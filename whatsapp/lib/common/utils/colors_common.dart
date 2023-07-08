@@ -1,7 +1,7 @@
 import 'package:flutter/widgets.dart';
 
-class Colors {
-  Colors._();
+class ColorsCommon {
+  ColorsCommon._();
 
   static const Color greenDark = Color(0xff00a884);
   static const Color blueDark = Color(0xff53bdeb);
