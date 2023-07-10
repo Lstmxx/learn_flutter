@@ -11,8 +11,82 @@ class LanguageSelect extends StatelessWidget {
     return showModalBottomSheet(
       context: context,
       builder: (sheetContext) {
-        return Container(
-          height: 400,
+        return Padding(
+          padding: const EdgeInsets.symmetric(vertical: 10),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Container(
+                height: 4,
+                width: 30,
+                decoration: BoxDecoration(
+                  color: sheetContext.theme.greyColor,
+                  borderRadius: BorderRadius.circular(5),
+                ),
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  const SizedBox(width: 20),
+                  IconButton(
+                    onPressed: () => Navigator.of(context).pop(),
+                    splashColor: Colors.transparent,
+                    splashRadius: 22,
+                    iconSize: 22,
+                    padding: EdgeInsets.zero,
+                    constraints: const BoxConstraints(minWidth: 40),
+                    icon: const Icon(
+                      Icons.close_outlined,
+                      color: ColorsCommon.greyDark,
+                    ),
+                  ),
+                  const SizedBox(width: 10),
+                  const Text(
+                    'App Language',
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 10),
+              Divider(
+                color: context.theme.greyColor!.withOpacity(0.3),
+                thickness: .5,
+              ),
+              RadioListTile(
+                value: true,
+                groupValue: true,
+                onChanged: (value) {},
+                activeColor: ColorsCommon.greenDark,
+                title: const Text('English'),
+                subtitle: Text(
+                  "(phone's language)",
+                  style: TextStyle(
+                    color: context.theme.greyColor,
+                  ),
+                ),
+              ),
+              RadioListTile(
+                value: true,
+                groupValue: false,
+                onChanged: (value) {},
+                activeColor: ColorsCommon.greenDark,
+                title: const Text('中文'),
+                subtitle: Text(
+                  "chinese",
+                  style: TextStyle(
+                    color: context.theme.greyColor,
+                  ),
+                ),
+              ),
+            ],
+          ),
         );
       },
     );

@@ -24,6 +24,11 @@ ThemeData darkTheme() {
     bottomSheetTheme: const BottomSheetThemeData(
       backgroundColor: ColorsCommon.greyBackground,
       modalBackgroundColor: ColorsCommon.greyBackground,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(
+          top: Radius.circular(20),
+        ),
+      ),
     ),
   );
 }
