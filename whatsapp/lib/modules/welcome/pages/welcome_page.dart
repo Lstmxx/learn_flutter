@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:whatsapp/common/utils/colors_common.dart';
 import 'package:whatsapp/common/widgets/custom_elevated_button.dart';
 
 import '../widgets/language_select.dart';
@@ -11,7 +10,6 @@ class WelcomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: ColorsCommon.backgroundDark,
       body: Column(
         children: [
           Expanded(
