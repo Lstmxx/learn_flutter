@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:whatsapp/common/extension/custom_theme_extension.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -20,7 +21,14 @@ class _LoginPageState extends State<LoginPage> {
           IconButton(
             onPressed: () {},
             splashColor: Colors.transparent,
-            icon: const Icon(Icons.more_vert),
+            splashRadius: 22,
+            iconSize: 22,
+            padding: EdgeInsets.zero,
+            constraints: const BoxConstraints(minWidth: 40),
+            icon: Icon(
+              Icons.more_vert,
+              color: context.theme.greyColor,
+            ),
           ),
         ],
       ),
