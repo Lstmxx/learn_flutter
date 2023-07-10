@@ -19,7 +19,8 @@ class _LoginPageState extends State<LoginPage> {
         actions: [
           IconButton(
             onPressed: () {},
-            icon: Icon(Icons.more_vert),
+            splashColor: Colors.transparent,
+            icon: const Icon(Icons.more_vert),
           ),
         ],
       ),
