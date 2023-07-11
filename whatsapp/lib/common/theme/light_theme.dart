@@ -15,6 +15,7 @@ ThemeData lightTheme() {
     ],
     appBarTheme: const AppBarTheme(
       titleTextStyle: TextStyle(fontSize: 18),
+      centerTitle: true,
       systemOverlayStyle: SystemUiOverlayStyle(
         statusBarColor: Colors.transparent,
         statusBarBrightness: Brightness.dark,

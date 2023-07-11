@@ -177,7 +177,7 @@ class _LoginPageState extends State<LoginPage> {
       floatingActionButton: CustomElevatedButton(
         onPressed: sendCodeToPhone,
         text: 'Next',
-        buttonWidth: 90,
+        // buttonWidth: 90,
       ),
     );
   }

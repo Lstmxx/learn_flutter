@@ -5,6 +5,8 @@ import 'package:whatsapp/modules/auth/pages/login_page.dart';
 import 'package:whatsapp/modules/auth/pages/verification_page.dart';
 import 'package:whatsapp/modules/welcome/pages/welcome_page.dart';
 
+import 'modules/auth/pages/user_info_page.dart';
+
 void main() {
   runApp(const MyApp());
 }
@@ -21,7 +23,7 @@ class MyApp extends StatelessWidget {
       theme: lightTheme(),
       darkTheme: darkTheme(),
       themeMode: ThemeMode.system,
-      home: const VerificationPage(),
+      home: const UserInfoPage(),
     );
   }
 }
