@@ -14,6 +14,7 @@ ThemeData lightTheme() {
       CustomThemeExtension.lightMode,
     ],
     appBarTheme: const AppBarTheme(
+      titleTextStyle: TextStyle(fontSize: 18),
       systemOverlayStyle: SystemUiOverlayStyle(
         statusBarColor: Colors.transparent,
         statusBarBrightness: Brightness.dark,
@@ -36,6 +37,10 @@ ThemeData lightTheme() {
           top: Radius.circular(20),
         ),
       ),
+    ),
+    dialogBackgroundColor: ColorsCommon.backgroundLight,
+    dialogTheme: DialogTheme(
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
     ),
   );
 }
