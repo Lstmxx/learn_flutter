@@ -1,0 +1,82 @@
+{
+  "project_info": {
+    "project_number": "261854987524",
+    "project_id": "whatsapp-113d5",
+    "storage_bucket": "whatsapp-113d5.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:261854987524:android:1ad0ddade7cc42ffbb7c51",
+        "android_client_info": {
+          "package_name": "com.example.github_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "261854987524-5u3dnohiehr0vl78kvl7hipuhu3amnav.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyACHrQmleXC0txMTzJnIiOYnz9N3jyA2G0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "261854987524-5u3dnohiehr0vl78kvl7hipuhu3amnav.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "261854987524-isg988a2q3q9ualtijgp94jc0l9a1rda.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.githubApp"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:261854987524:android:276e6ec4c5887ad8bb7c51",
+        "android_client_info": {
+          "package_name": "com.example.whatsapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "261854987524-5u3dnohiehr0vl78kvl7hipuhu3amnav.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyACHrQmleXC0txMTzJnIiOYnz9N3jyA2G0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "261854987524-5u3dnohiehr0vl78kvl7hipuhu3amnav.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "261854987524-isg988a2q3q9ualtijgp94jc0l9a1rda.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.githubApp"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
