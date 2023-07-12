@@ -1,3 +1,6 @@
+import 'dart:io';
+import 'dart:typed_data';
+
 import 'package:flutter/material.dart';
 import 'package:whatsapp/common/extension/custom_theme_extension.dart';
 import 'package:whatsapp/common/utils/colors_common.dart';
@@ -15,6 +18,9 @@ class UserInfoPage extends StatefulWidget {
 }
 
 class _UserInfoPageState extends State<UserInfoPage> {
+  File? imageCamera;
+  Uint8List? imageGallery;
+
   imagePickerTypeBottomSheet() {
     return showModalBottomSheet(
       context: context,
@@ -49,20 +55,25 @@ class _UserInfoPageState extends State<UserInfoPage> {
               children: [
                 const SizedBox(width: 20),
                 imagePickerIcon(
-                  onTap: () {
-                    Navigator.pop(context);
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (context) => const ImagePickerPage(),
-                      ),
-                    );
-                  },
+                  onTap: () {},
                   icon: Icons.camera_alt_rounded,
                   text: 'Camera',
                 ),
                 const SizedBox(width: 15),
                 imagePickerIcon(
-                  onTap: () {},
+                  onTap: () async {
+                    Navigator.pop(context);
+                    final image = await Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => const ImagePickerPage(),
+                      ),
+                    );
+                    if (image == null) return;
+                    setState(() {
+                      imageGallery = image;
+                      imageCamera = null;
+                    });
+                  },
                   icon: Icons.photo_camera_back_rounded,
                   text: 'Gallery',
                 ),
@@ -131,6 +142,18 @@ class _UserInfoPageState extends State<UserInfoPage> {
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
                   color: context.theme.photoIconBgColor,
+                  border: Border.all(
+                    color: imageCamera == null && imageGallery == null
+                        ? Colors.transparent
+                        : context.theme.greyColor!.withOpacity(0.4),
+                  ),
+                  image: imageCamera != null || imageGallery != null
+                      ? DecorationImage(
+                          image: imageGallery != null
+                              ? MemoryImage(imageGallery!) as ImageProvider
+                              : FileImage(imageCamera!),
+                        )
+                      : null,
                 ),
                 child: Padding(
                   padding: const EdgeInsets.only(bottom: 3, right: 3),
