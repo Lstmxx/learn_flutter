@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:whatsapp/common/extension/custom_theme_extension.dart';
 import 'package:whatsapp/common/utils/colors_common.dart';
 import 'package:whatsapp/common/widgets/custom_icon_button.dart';
+import 'package:whatsapp/common/widgets/short_h_bar.dart';
 
 class LanguageSelect extends StatelessWidget {
   const LanguageSelect({
@@ -17,14 +18,7 @@ class LanguageSelect extends StatelessWidget {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Container(
-                height: 4,
-                width: 30,
-                decoration: BoxDecoration(
-                  color: sheetContext.theme.greyColor,
-                  borderRadius: BorderRadius.circular(5),
-                ),
-              ),
+              const ShortHBar(),
               const SizedBox(
                 height: 20,
               ),

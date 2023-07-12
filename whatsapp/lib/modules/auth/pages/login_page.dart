@@ -1,21 +1,23 @@
 import 'package:country_picker/country_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:whatsapp/common/extension/custom_theme_extension.dart';
 import 'package:whatsapp/common/helper/show_alert_dialog.dart';
 import 'package:whatsapp/common/utils/colors_common.dart';
 import 'package:whatsapp/common/widgets/custom_elevated_button.dart';
+import 'package:whatsapp/modules/auth/controller/auth_controller.dart';
 import 'package:whatsapp/modules/auth/widgets/custom_text_field.dart';
 
 import '../../../common/widgets/custom_icon_button.dart';
 
-class LoginPage extends StatefulWidget {
+class LoginPage extends ConsumerStatefulWidget {
   const LoginPage({super.key});
 
   @override
-  State<LoginPage> createState() => _LoginPageState();
+  ConsumerState<LoginPage> createState() => _LoginPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _LoginPageState extends ConsumerState<LoginPage> {
   late TextEditingController countryNameController;
   late TextEditingController countryCodeController;
   late TextEditingController phoneNumberController;
@@ -58,13 +60,18 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   sendCodeToPhone() {
-    final phone = phoneNumberController.text;
+    final phoneNumber = phoneNumberController.text;
     final countryName = countryNameController.text;
     final countryCode = countryCodeController.text;
 
-    if (phone.isEmpty) {
+    if (phoneNumber.isEmpty) {
       return showAlertDialog(context: context, message: "号码不能为空");
     }
+
+    ref.read(authControllerProvider).sendSmsCode(
+          context: context,
+          phoneNumber: '+$countryCode$phoneNumber',
+        );
   }
 
   @override
@@ -90,7 +97,7 @@ class _LoginPageState extends State<LoginPage> {
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         elevation: 0,
         title: Text(
-          'Enter your phone number',
+          'Enter your phoneNumber number',
           style: TextStyle(
             color: context.theme.authAppBarTextColor,
           ),
@@ -110,7 +117,7 @@ class _LoginPageState extends State<LoginPage> {
             child: RichText(
               textAlign: TextAlign.center,
               text: TextSpan(
-                text: 'WhatsApp will need to verify your phone number. ',
+                text: 'WhatsApp will need to verify your phoneNumber number. ',
                 style: TextStyle(
                   color: context.theme.greyColor,
                   height: 1.5,
@@ -156,7 +163,7 @@ class _LoginPageState extends State<LoginPage> {
                   child: CustomTextField(
                     onTrap: () {},
                     controller: phoneNumberController,
-                    hintText: 'phone number',
+                    hintText: 'phoneNumber number',
                     textAlign: TextAlign.left,
                     keyboardType: TextInputType.number,
                   ),
