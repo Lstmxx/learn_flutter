@@ -2,7 +2,9 @@ import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:whatsapp/common/extension/custom_theme_extension.dart';
+import 'package:whatsapp/common/helper/show_alert_dialog.dart';
 import 'package:whatsapp/common/utils/colors_common.dart';
 import 'package:whatsapp/common/widgets/custom_elevated_button.dart';
 import 'package:whatsapp/common/widgets/custom_icon_button.dart';
@@ -55,7 +57,7 @@ class _UserInfoPageState extends State<UserInfoPage> {
               children: [
                 const SizedBox(width: 20),
                 imagePickerIcon(
-                  onTap: () {},
+                  onTap: pickImageFromCamera,
                   icon: Icons.camera_alt_rounded,
                   text: 'Camera',
                 ),
@@ -84,6 +86,19 @@ class _UserInfoPageState extends State<UserInfoPage> {
         );
       },
     );
+  }
+
+  pickImageFromCamera() async {
+    Navigator.of(context).pop();
+    try {
+      final image = await ImagePicker().pickImage(source: ImageSource.camera);
+      setState(() {
+        imageCamera = File(image!.path);
+        imageGallery = null;
+      });
+    } catch (e) {
+      showAlertDialog(context: context, message: e.toString());
+    }
   }
 
   imagePickerIcon({
@@ -149,6 +164,7 @@ class _UserInfoPageState extends State<UserInfoPage> {
                   ),
                   image: imageCamera != null || imageGallery != null
                       ? DecorationImage(
+                          fit: BoxFit.cover,
                           image: imageGallery != null
                               ? MemoryImage(imageGallery!) as ImageProvider
                               : FileImage(imageCamera!),
@@ -160,7 +176,9 @@ class _UserInfoPageState extends State<UserInfoPage> {
                   child: Icon(
                     Icons.add_a_photo_rounded,
                     size: 48,
-                    color: context.theme.photoIconColor,
+                    color: imageCamera == null && imageGallery == null
+                        ? context.theme.photoIconColor
+                        : Colors.transparent,
                   ),
                 ),
               ),
