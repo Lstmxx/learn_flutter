@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:whatsapp/common/helper/show_alert_dialog.dart';
+import 'package:whatsapp/common/helper/show_loading_dialog.dart';
 import 'package:whatsapp/common/models/user_model.dart';
 import 'package:whatsapp/common/repository/firebase_storage_repository.dart';
 import 'package:whatsapp/common/routes/routes.dart';
@@ -23,6 +24,15 @@ class AuthRepository {
     required this.firestore,
   });
 
+  Future<UserModel?> getCurrentUserInfo() async {
+    UserModel? user;
+    final userInfo =
+        await firestore.collection('users').doc(auth.currentUser?.uid).get();
+    if (userInfo.data() == null) return user;
+    user = UserModel.fromMap(userInfo.data()!);
+    return user;
+  }
+
   void saveUserInfoToFirestore({
     required String username,
     required var profileImage,
@@ -31,6 +41,7 @@ class AuthRepository {
     required bool mounted,
   }) async {
     try {
+      showLoadingDialog(context: context, message: '保存中');
       String uid = auth.currentUser!.uid;
       String profileImageUrl = '';
       if (profileImage != null) {
@@ -54,6 +65,7 @@ class AuthRepository {
 
       Navigator.pushNamedAndRemoveUntil(context, Routes.home, (route) => false);
     } catch (e) {
+      Navigator.pop(context);
       showAlertDialog(context: context, message: e.toString());
     }
   }
@@ -65,15 +77,19 @@ class AuthRepository {
     required bool mounted,
   }) async {
     try {
+      showLoadingDialog(context: context, message: '验证中');
       final credential = PhoneAuthProvider.credential(
         verificationId: smsCodeId,
         smsCode: smsCode,
       );
       await auth.signInWithCredential(credential);
       if (!mounted) return;
-      Navigator.of(context)
-          .pushNamedAndRemoveUntil(Routes.userInfo, (route) => false);
+      Navigator.of(context).pushNamedAndRemoveUntil(
+        Routes.userInfo,
+        (route) => false,
+      );
     } on FirebaseAuthException catch (e) {
+      Navigator.pop(context);
       showAlertDialog(context: context, message: e.toString());
     }
   }
@@ -83,6 +99,7 @@ class AuthRepository {
     required String phoneNumber,
   }) async {
     try {
+      showLoadingDialog(context: context, message: '发送验证码中');
       await auth.verifyPhoneNumber(
         phoneNumber: phoneNumber,
         verificationCompleted: (PhoneAuthCredential credential) async {
@@ -104,6 +121,7 @@ class AuthRepository {
         codeAutoRetrievalTimeout: (String smsCodeId) {},
       );
     } on FirebaseAuthException catch (e) {
+      Navigator.pop(context);
       showAlertDialog(context: context, message: e.toString());
     }
   }
