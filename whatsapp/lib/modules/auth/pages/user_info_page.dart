@@ -2,6 +2,7 @@ import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:whatsapp/common/extension/custom_theme_extension.dart';
 import 'package:whatsapp/common/helper/show_alert_dialog.dart';
@@ -9,19 +10,39 @@ import 'package:whatsapp/common/utils/colors_common.dart';
 import 'package:whatsapp/common/widgets/custom_elevated_button.dart';
 import 'package:whatsapp/common/widgets/custom_icon_button.dart';
 import 'package:whatsapp/common/widgets/short_h_bar.dart';
+import 'package:whatsapp/modules/auth/controller/auth_controller.dart';
 import 'package:whatsapp/modules/auth/pages/image_picker_page.dart';
 import 'package:whatsapp/modules/auth/widgets/custom_text_field.dart';
 
-class UserInfoPage extends StatefulWidget {
+class UserInfoPage extends ConsumerStatefulWidget {
   const UserInfoPage({super.key});
 
   @override
-  State<UserInfoPage> createState() => _UserInfoPageState();
+  ConsumerState<UserInfoPage> createState() => _UserInfoPageState();
 }
 
-class _UserInfoPageState extends State<UserInfoPage> {
+class _UserInfoPageState extends ConsumerState<UserInfoPage> {
   File? imageCamera;
   Uint8List? imageGallery;
+
+  late TextEditingController usernameController;
+
+  saveUserDataToFirebase() async {
+    String username = usernameController.text;
+    if (username.isEmpty) {
+      return showAlertDialog(context: context, message: '用户名不能为空');
+    }
+    if (username.length < 3 || username.length > 20) {
+      return showAlertDialog(context: context, message: '用户名长度为3到20位');
+    }
+
+    ref.read(authControllerProvider).saveUserInfoToFirestore(
+          username: username,
+          profileImage: imageCamera ?? imageGallery ?? '',
+          context: context,
+          mounted: mounted,
+        );
+  }
 
   imagePickerTypeBottomSheet() {
     return showModalBottomSheet(
@@ -128,6 +149,18 @@ class _UserInfoPageState extends State<UserInfoPage> {
   }
 
   @override
+  void initState() {
+    usernameController = TextEditingController();
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    usernameController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -187,8 +220,9 @@ class _UserInfoPageState extends State<UserInfoPage> {
             Row(
               children: [
                 const SizedBox(width: 20),
-                const Expanded(
+                Expanded(
                   child: CustomTextField(
+                    controller: usernameController,
                     hintText: 'Type your name here',
                     textAlign: TextAlign.left,
                     autoFocus: true,
@@ -207,7 +241,7 @@ class _UserInfoPageState extends State<UserInfoPage> {
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: CustomElevatedButton(
-        onPressed: () {},
+        onPressed: saveUserDataToFirebase,
         text: 'NEXT',
         // buttonWidth: 90,
       ),
